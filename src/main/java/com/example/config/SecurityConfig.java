@@ -27,6 +27,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		http.logout()
 			.logoutUrl("/logout")
 			.logoutSuccessUrl("/loginForm");
+		
+		http.authorizeRequests()
+			.antMatchers("/loginForm").permitAll()
+			.antMatchers("/admin").hasAuthority("ADMIN")
+			.anyRequest().authenticated();
 	}
 	
 	@Bean
